@@ -53,7 +53,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.framework.cloud.file.api.UserApplication</mainClass>
+                    <mainClass>com.framework.cloud.file.api.FileApiApplication</mainClass>
                     <layout>ZIP</layout>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
