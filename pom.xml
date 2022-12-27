@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.framework.cloud</groupId>
+    <artifactId>framework-cloud-file</artifactId>
+    <version>1.0.0</version>
+    <name>framework-cloud-file</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>framework-cloud-file-api</module>
+        <module>framework-cloud-file-common</module>
+        <module>framework-cloud-file-domain</module>
+        <module>framework-cloud-file-infrastructure</module>
+    </modules>
+
+    <properties>
+        <datasource.framework.cloud.starter.version>1.0.0</datasource.framework.cloud.starter.version>
+        <core.framework.cloud.starter.version>1.0.0</core.framework.cloud.starter.version>
+        <common.framework.cloud.starter.version>1.0.0</common.framework.cloud.starter.version>
+        <mybatis.framework.cloud.starter.version>1.0.0</mybatis.framework.cloud.starter.version>
+        <cache.framework.cloud.starter.version>1.0.0</cache.framework.cloud.starter.version>
+        <feign.framework.cloud.starter.version>1.0.0</feign.framework.cloud.starter.version>
+        <swagger.framework.cloud.starter.version>1.0.0</swagger.framework.cloud.starter.version>
+        <executors.framework.cloud.starter.version>1.0.0</executors.framework.cloud.starter.version>
+        <enums.framework.cloud.starter.version>1.0.0</enums.framework.cloud.starter.version>
+        <event.framework.cloud.starter.version>1.0.0</event.framework.cloud.starter.version>
+        <logging.framework.cloud.starter.version>1.0.0</logging.framework.cloud.starter.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.framework.cloud</groupId>
+                <artifactId>pom-framework-cloud-starter</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.framework.cloud</groupId>
+        <artifactId>framework-cloud-file</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>framework-cloud-file-common</artifactId>
+    <name>framework-cloud-file-common</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>common-framework-cloud-starter</artifactId>
+            <version>${common.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>swagger-framework-cloud-starter</artifactId>
+            <version>${swagger.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>enums-framework-cloud-starter</artifactId>
+            <version>${enums.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>logging-framework-cloud-starter</artifactId>
+            <version>${logging.framework.cloud.starter.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
