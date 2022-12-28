@@ -1,7 +1,7 @@
 package com.framework.cloud.file.infrastructure.service;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.framework.cloud.cache.cache.RedisCache;
+import com.framework.cloud.cache.cache.RedisSetCache;
 import com.framework.cloud.common.utils.AssertUtil;
 import com.framework.cloud.common.utils.DateUtil;
 import com.framework.cloud.file.common.constant.FileConstant;
@@ -15,6 +15,7 @@ import com.framework.cloud.file.domain.utils.FileUtil;
 import com.framework.cloud.file.domain.utils.OssUtil;
 import com.framework.cloud.file.domain.utils.UploadUtil;
 import com.framework.cloud.mybatis.utils.SnowflakeUtil;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.apache.skywalking.apm.toolkit.trace.RunnableWrapper;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,10 +23,7 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 上传 服务实现类
@@ -37,7 +35,7 @@ import java.util.Objects;
 @EnableConfigurationProperties(FileProperties.class)
 public class UploadServiceImpl implements UploadService {
 
-    private final RedisCache redisCache;
+    private final RedisSetCache redisSetCache;
     private final FileService fileService;
     private final FileProperties fileProperties;
     private final AsyncTaskExecutor filePool;
@@ -51,7 +49,7 @@ public class UploadServiceImpl implements UploadService {
         for (String path : paths) {
             MultipartFile file = FileUtil.fileToMultipartFile(path);
             if (!FileUtil.checkFile(file)) {
-                redisCache.add(FileConstant.UPLOAD_KEY + bizId, String.format(FileMsg.FILE_NOT_FOUND.getMsg(), path));
+                redisSetCache.add(FileConstant.UPLOAD_KEY + bizId, String.format(FileMsg.FILE_NOT_FOUND.getMsg(), path));
                 continue;
             }
             upload(bizId, file);
@@ -97,14 +95,15 @@ public class UploadServiceImpl implements UploadService {
             filePool.execute(RunnableWrapper.of(() -> fileService.save(fileDTO)));
         }
         if (errorMsg.size() > 0) {
-            redisCache.add(FileConstant.UPLOAD_KEY + bizId, errorMsg.toArray(new String[0]));
+            redisSetCache.add(FileConstant.UPLOAD_KEY + bizId, errorMsg);
         }
         return bizId;
     }
 
     @Override
     public List<String> fail(Long bizId) {
-        return redisCache.getSet(FileConstant.UPLOAD_KEY + bizId, String.class);
+        Set<String> failList = redisSetCache.get(FileConstant.UPLOAD_KEY + bizId, String.class);
+        return Lists.newArrayList(failList);
     }
 
     private String uploadPath(Long bizId) {
