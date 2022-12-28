@@ -6,7 +6,7 @@ import com.framework.cloud.common.utils.AssertUtil;
 import com.framework.cloud.common.utils.DateUtil;
 import com.framework.cloud.file.common.constant.FileConstant;
 import com.framework.cloud.file.common.dto.FileDTO;
-import com.framework.cloud.file.common.enums.EnvEnum;
+import com.framework.cloud.file.common.enums.EnvType;
 import com.framework.cloud.file.common.msg.FileMsg;
 import com.framework.cloud.file.domain.properties.FileProperties;
 import com.framework.cloud.file.domain.service.FileService;
@@ -116,7 +116,7 @@ public class UploadServiceImpl implements UploadService {
 
     private boolean uploadFile(String uploadPath, String newName, MultipartFile file) {
         boolean flag ;
-        if (fileProperties.getEnv().equals(EnvEnum.OFFLINE)) {
+        if (fileProperties.getEnv().equals(EnvType.OFFLINE)) {
             flag = UploadUtil.upload(file, uploadPath, newName);
         } else {
             flag = OssUtil.upload(file, fileProperties.getOss().getBucketName(), uploadPath, newName);

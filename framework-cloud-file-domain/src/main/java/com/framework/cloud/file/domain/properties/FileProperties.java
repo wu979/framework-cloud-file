@@ -1,6 +1,6 @@
 package com.framework.cloud.file.domain.properties;
 
-import com.framework.cloud.file.common.enums.EnvEnum;
+import com.framework.cloud.file.common.enums.EnvType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -18,7 +18,7 @@ public class FileProperties {
     /**
      * 环境变量 ( offline , online )
      */
-    private EnvEnum env;
+    private EnvType env;
 
     /**
      * 文件上传路径前缀

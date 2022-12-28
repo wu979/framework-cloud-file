@@ -5,7 +5,7 @@ package com.framework.cloud.file.common.enums;
  *
  * @author wusiwei
  */
-public enum CompanyEnum {
+public enum CompanyType {
 
     B, KB, MB, GB
 }

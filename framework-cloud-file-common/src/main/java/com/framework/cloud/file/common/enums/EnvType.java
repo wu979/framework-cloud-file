@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
  * @author wusiwei
  */
 @RequiredArgsConstructor
-public enum EnvEnum {
+public enum EnvType {
 
     OFFLINE, ONLINE
 }

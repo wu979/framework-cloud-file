@@ -3,16 +3,13 @@ package com.framework.cloud.file.domain.utils;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.HexUtil;
 import com.framework.cloud.common.enums.GlobalNumber;
-import com.framework.cloud.file.common.enums.CompanyEnum;
+import com.framework.cloud.file.common.enums.CompanyType;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -26,7 +23,6 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,16 +79,16 @@ public class FileUtil {
         DecimalFormat df = new DecimalFormat(DECIMAL_FORMAT);
         String sizeStr = "";
         if (size == 0) {
-            return 0 + CompanyEnum.B.name();
+            return 0 + CompanyType.B.name();
         }
         if (size < 1024) {
-            sizeStr = df.format((double) size) + CompanyEnum.B.name();
+            sizeStr = df.format((double) size) + CompanyType.B.name();
         } else if (size < 1048576) {
-            sizeStr = df.format((double) size / 1024) + CompanyEnum.KB.name();
+            sizeStr = df.format((double) size / 1024) + CompanyType.KB.name();
         } else if (size < 1073741824) {
-            sizeStr = df.format((double) size / 1048576) + CompanyEnum.MB.name();
+            sizeStr = df.format((double) size / 1048576) + CompanyType.MB.name();
         } else {
-            sizeStr = df.format((double) size / 1073741824) + CompanyEnum.GB.name();
+            sizeStr = df.format((double) size / 1073741824) + CompanyType.GB.name();
         }
         return sizeStr;
     }
