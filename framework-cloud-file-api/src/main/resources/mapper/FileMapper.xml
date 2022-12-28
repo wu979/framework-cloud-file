@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.cloud.file.infrastructure.mapper.FileMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.cloud.file.domain.entity.File">
+        <id column="id" property="id"/>
+        <result column="original_name" property="originalName"/>
+        <result column="new_name" property="newName"/>
+        <result column="ext" property="ext"/>
+        <result column="size" property="size"/>
+        <result column="path" property="path"/>
+        <result column="salt" property="salt"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+        <result column="version" property="version"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        f.id, f.original_name, f.new_name, f.ext, f.size, f.path, f.salt, f.biz_id , f.tenant_id, f.create_id, f.update_id, f.create_time, f.update_time, f.deleted, f.version
+    </sql>
+
+    <select id="page" resultType="com.framework.cloud.file.common.vo.FilePageVO">
+        select
+            f.id, f.original_name, f.ext, f.size,
+            f.create_id, f.update_id, f.create_time, f.update_time
+        from t_file f
+        where f.deleted = 1
+        <if test="param.name != null and param.name != ''">
+            and f.original_name like CONCAT('%',#{param.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="param.ext != null and param.ext != ''">
+            and f.ext = #{param.ext,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

@@ -54,6 +54,12 @@
             <artifactId>framework-cloud-file-common</artifactId>
             <version>${version}</version>
         </dependency>
+        <!--阿里云对象存储-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${aliyun.sdk.oss.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
