@@ -14,7 +14,7 @@ import com.framework.cloud.file.domain.service.UploadService;
 import com.framework.cloud.file.domain.utils.FileUtil;
 import com.framework.cloud.file.domain.utils.OssUtil;
 import com.framework.cloud.file.domain.utils.UploadUtil;
-import com.framework.cloud.mybatis.utils.SnowflakeUtil;
+import com.framework.cloud.mybatis.utils.IdUtil;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.apache.skywalking.apm.toolkit.trace.RunnableWrapper;
@@ -44,7 +44,7 @@ public class UploadServiceImpl implements UploadService {
     public Long upload(Long bizId, String... paths) {
         AssertUtil.isEmpty(Arrays.asList(paths), FileMsg.NOT_FILE.getMsg());
         if (Objects.isNull(bizId)) {
-            bizId = SnowflakeUtil.nextId();
+            bizId = IdUtil.getId();
         }
         for (String path : paths) {
             MultipartFile file = FileUtil.fileToMultipartFile(path);
@@ -61,7 +61,7 @@ public class UploadServiceImpl implements UploadService {
     public Long upload(Long bizId, MultipartFile... files) {
         AssertUtil.isEmpty(Arrays.asList(files), FileMsg.NOT_FILE.getMsg());
         if (Objects.isNull(bizId)) {
-            bizId = SnowflakeUtil.nextId();
+            bizId = IdUtil.getId();
         }
         List<String> errorMsg = new ArrayList<>();
         for (MultipartFile file : files) {
