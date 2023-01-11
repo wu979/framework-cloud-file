@@ -17,7 +17,6 @@ import com.framework.cloud.file.domain.utils.UploadUtil;
 import com.framework.cloud.mybatis.utils.IdUtil;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
-import org.apache.skywalking.apm.toolkit.trace.RunnableWrapper;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
@@ -92,7 +91,7 @@ public class UploadServiceImpl implements UploadService {
                 continue;
             }
             FileDTO fileDTO = new FileDTO(originalName, newName, suffix, size, uploadPath, bizId);
-            filePool.execute(RunnableWrapper.of(() -> fileService.save(fileDTO)));
+            filePool.execute(() -> fileService.save(fileDTO));
         }
         if (errorMsg.size() > 0) {
             redisSetCache.add(FileConstant.UPLOAD_KEY + bizId, errorMsg);
